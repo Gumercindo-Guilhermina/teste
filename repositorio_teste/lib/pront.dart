@@ -6,49 +6,74 @@ class Pront extends StatefulWidget {
 }
 
 class _ProntState extends State<Pront> {
-  String cidade = '';
+  String nome;
+  String sobrenome;
+
+  GlobalKey formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Formulário'),
-        centerTitle: true,
+        title: Text("Formulário"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Nome: ',
-              style: TextStyle(
-                fontSize: 20,
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(labelText: "Nome"),
+                onSaved: (value) {
+                  nome = value;
+                },
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "Campo Obrigatório";
+                  }
+                },
               ),
-            ),
-            Padding(padding: EdgeInsets.all(10)),
-            TextField(
-              onChanged: (text) {
-                cidade = text;
-              },
-              textCapitalization: TextCapitalization.sentences,
-            ),
-            Padding(padding: EdgeInsets.all(10)),
-            Text(
-              'Sobrenome: ',
-              style: TextStyle(
-                fontSize: 20,
+              TextFormField(
+                decoration: InputDecoration(labelText: "Sobrenome"),
+                onSaved: (value) {
+                  sobrenome = value;
+                },
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "Campo Obrigatório";
+                  }
+                },
               ),
-            ),
-            Padding(padding: EdgeInsets.all(10)),
-            TextField(
-              onChanged: (text) {
-                cidade = text;
-              },
-              textCapitalization: TextCapitalization.sentences,
-            ),
-          ],
+              TextFormField(
+                decoration: InputDecoration(labelText: "Data de Nascimento"),
+                keyboardType: TextInputType.datetime,
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Casa"),
+                keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Etnia"),
+                keyboardType: TextInputType.text,
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Sexo"),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Aldeia de Residência"),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Altura"),
+                keyboardType: TextInputType.number,
+              ),
+              RaisedButton(
+                  child: Text(""),
+                  onPressed: () {
+                    // _showSegundaPag(context);
+                  })
+            ],
+          ),
         ),
       ),
     );
